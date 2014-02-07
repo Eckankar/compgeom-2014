@@ -45,7 +45,18 @@ edges in $E$.
 \section{Exercise 1.6}
 
 \subsection{a}
-% TODO
+Let $L$ be a set of line segments and $E$ be the set of endpoints of the lines in $L$.
+
+We wish to prove that $CH(L) = CH(E)$.
+
+Since $E \subseteq L$, and $L \subseteq CH(L)$, we must have $E \subseteq CH(L)$. Since
+$CH(E)$ is the smallest such convex set, we must have that $CH(E) \subseteq CH(L)$.
+
+We now need that $CH(L) \subseteq CH(E)$. By definition of convexity, we know that for any
+$p_1$ and $p_2$ in $E$ the line $p_1p_2 \subseteq CH(E)$. Since each line in $L$ has this
+form, we must have that $L \subseteq CH(E)$. By same argument as above, we get $CH(L) \subseteq CH(E)$.
+
+This proves that $CH(L) = CH(E)$.
 
 \subsection{b}
 % TODO
