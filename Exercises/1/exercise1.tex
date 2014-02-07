@@ -13,7 +13,34 @@
 \maketitle
 
 \section{Exercise 1.3}
-% TODO
+Let $E$ be the set of edges, and $\mathcal{P}$ be the (initially empty) list of
+ordered points in the polygon.
+
+First, create $P$, a sorted array of the endpoints of the edges, each tagged
+with the edge they belong to. This takes $O(n \lg n)$.
+
+Pick an edge $e_0$, to be our starting edge, and let $e_0 = (p_0, p_0')$.
+
+Do a binary search on $P$ for $p_0$, finding the other edge ending in $p_0$. Let
+$p_1$ be the other endpoint of this edge.
+
+Check if $p_0', p_0$ and $p_1$ together make a right turn. If so, add $p_0'$ and
+$p_0$ to $\mathcal{P}$. Let $p_{start} = p_0'$.
+
+If they do not make a right turn, locate the edge corresponding to $p_0'$ in
+$P$, and let $p_1'$ be the other edgepoint, in a similar fashion as to what
+was done for $p_1$. $p_0$, $p_0'$ and $p_1'$ must now make a right turn, so add
+$p_0$ and $p_0'$ to $\mathcal{P}$. Let $p_{start} = p_0$.
+
+For $i$ starting at $1$, ending when $p_i \neq p_{start}$, repeat the following: 
+\begin{itemize}
+    \item Add $p_i$ to $\mathcal{P}$
+    \item Find the other edge containing $p_i$ using binary search on $P$. Let $p_{i+1}$
+          be the other endpoint of this line.
+\end{itemize}
+
+After this, $\mathcal{P}$ contains the clockwise polygon corresponding to the
+edges in $E$.
 
 \section{Exercise 1.6}
 
