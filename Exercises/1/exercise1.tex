@@ -62,8 +62,59 @@ This proves that $CH(L) = CH(E)$.
 % TODO
 
 \section{Chan's paper}
-% TODO
 
+Chan's paper describes an algorithm for finding the convex hull of of
+a set of objects in two and three dimensions using $O(n log h)$ time and
+linear space. Here, we will focus on the two-dimensional case.
+
+Several other algorithms for computing convex hulls in $O(n log h)$ time
+have been presented, but they can be quite complicated to implement,
+and some of them hide big constants under the hood. Chan's proposed
+algorithm, on the other hand, uses simple techniques while achieving
+the same worst-case time complexity.
+
+The algorithm is simple in its description: split the set of points
+into groups of size $m$, where $0 < m \leq m$; compute the convex hull
+of each group using another simple CV algorithm, such as Graham's
+scan; and merge the groups using a gift-wrapping algorithm. Computing
+the convex hull for each group using Graham's scan takes $O(m log m)$, so
+the trick lies in picking an appropriate value for $m$ and performing
+the merge in an effective way.
+
+Let us first consider the merging operation. We are given $\lceil n /
+m \rceil$ convex sets of at most $m$ points, and we wish to compute
+the convex hull of all the points. Given an initial point, $p_1$,
+known to be in the convex hull (such as the rightmost point of them
+all), and a point infinitely far away, $p_0$, for each group $i$, find
+the point, $q_i$ such that the angle $\angle p_0 p_1 q_i$ is
+maximized. Since the groups are given as a list of points in
+counter-clockwise order, we can find $q_i$ by using a binary
+search. If we ignore the details of the binary search for the moment,
+and concentrate on the fact that it will give us a $log m$ search time
+for each $q_i$, we then have to find the $q$ out of all the $g_i$s,
+that maximizes the angle, which takes $O(n / m)$ time. Finally, we use
+this $q$ as our next initial point and $p_1$ as the previous point and
+continue the search. We perform this search a maximum of $H$ times,
+for a total of $O(H((n / m) log m))$ time. Thus, by choosing $H=m$,
+merging takes $O(m log m)$ time.
+
+The binary search is not described in Chan's paper, only referencing
+another paper~\footnote{\emph{An algorithm for convex polytopes} by
+  D.R. Chand and S.S. Kapur}, which does not explain the method very
+well either. The basic idea however, is to take advantage of the fact
+that the coordingates are given in clockwise or counter-clockwise
+order. Then, we continually check whether the tangent point is in the
+left or right half of some intersection of the polygon. For a more
+in-depth explanation, including some example code which actually
+performs the binary search, consult Tom Switzer's blog post on the
+matter~\footnote{\url{http://tomswitzer.net/2010/12/2d-convex-hulls-chans-algorithm/},
+  accessed 2014-02-10}.
+
+Finally, we just have to chose an appropriate value for $H$. By simply
+trying successive values for $2^2^t$ until the above algorithm does
+not return \emph{incomplete}, we use at most $log log h$ tries to find
+the appropriate value for $H$, and with each iteration taking $O(n log
+h)$ time, the overall time complexity is $O(n log h)$.
 
 \end{document}
 
