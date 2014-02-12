@@ -28,5 +28,46 @@ more diagonals are added to that part of the polygon. Since we know
 that we add at most $n-2$ diagonals, the amortized cost of adding a
 diagonal is thus $O(1)$.
 
+\section{Exercise 3.14}
+
+Given a simple polygon $\mathcal{P}$ with $n$ vertices and a point $p$
+inside it, we wish to compute the region inside $\mathcal{P}$ that is
+visible from $p$.
+
+We start by computing the triangulation $\mathcal{T}$ of $\mathcal{P}$
+as a DCEL and finding the triangle $t$ inside $\mathcal{T}$ that contains
+$p$.
+
+Since $p$ is inside $t$, we know that all corners, and therefore all
+edges of $t$ are visible from $p$. We now recursively examine
+neighbors of triangles that are known to be entirely visible, checking
+to see if they are also visible.
+
+Let $t_1$ consisting of vertices $v_1, v_2, v_3$ be a neighbor to an
+entirely visible triangle $t_0$ consisting of vertices $v_0, v_1,
+v_2$. We know that vertices $v_1 and v_2$ are visible from $p$, so we
+just have to check whether $v_3$ is visible. This can be done simply
+by checking whether the line segment $\{p, v_3\}$ intersects with the
+line segment $\{v_1, v_2\}$. If that is the case, $v_3$ is also
+visible from $p$ and $t_1$ is entirely visible from $p$ and we can
+continue recursively. If not, there is some part $t_1$ that is not
+visible from $p$. We thus have to split $t_1$ up into two triangles,
+such that one of them is entirely visible from $p$ and the other is
+entirely invisible. Doing so is a simple matter of producing the lines
+from $p$ to $v_1$ and $p$ to $v_2$ and see if they intersect with the
+line segments $\{v_2, v_3\}$ and $\{v_1, v_3\}$, respectively. If the
+extended line from $p$ to $v_1$ intersects with $\{v_2, v_3\}$ at some
+point $v_4$ we simply create a new entirely visible triangle $\{v_1,
+v_2, v_4\}$ its neighbors (excluding the invisible part of
+$t$). Analogously for $\{v_1, v_3\}$.
+
+As each step in the recursive neighbor-checking takes $O(1)$ time, the
+entire recursion only takes $O(n)$ time. Since triangulation takes
+$O(n)$ time (using Chazelles algorithm) and finding the triangle that
+contains $p$ takes $O(n)$ time (simply check each triangle to see if
+it contains $p$, the entire thing takes $O(n)$ time. Finally, since
+the only data structure we use is the DCEL, we only take up $O(n)$
+space as well.
+
 \end{document}
 
