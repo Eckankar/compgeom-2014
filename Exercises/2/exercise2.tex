@@ -1,0 +1,32 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath,amssymb,amsfonts}
+
+\title{Computational Geometry - Exercises for week 2}
+\author{Philip Munksgaard\\Sebastian Paaske Tørholm}
+
+\begin{document}
+\maketitle
+
+\section{Exercise 3.8}
+
+Adding diagonals to a DCEL can take $O(n)$ time since we have to
+update the incident faces of all the edges in one half of the
+diagonalized polygon, of which there may be up to $n-2$. Apart from
+incident phases, adding a diagonal only requires us to modify two
+\texttt{next} and \texttt{previous} pointers, as well as creating a
+new face, all of which takes $O(1)$ time.
+
+However, \texttt{MakeMonotone} changes the incident faces for each
+edge at most once. Every time a diagonal is added, all the edges above
+the diagonal are disregarded from the rest of the computations, and no
+more diagonals are added to that part of the polygon. Since we know
+that we add at most $n-2$ diagonals, the amortized cost of adding a
+diagonal is thus $O(1)$.
+
+\end{document}
+
