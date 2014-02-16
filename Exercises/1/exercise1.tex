@@ -6,6 +6,9 @@
 
 \usepackage{amsmath,amssymb,amsfonts}
 
+\usepackage{hyperref}
+\usepackage{graphicx}
+
 \title{Computational Geometry - Exercises for week 1}
 \author{Philip Munksgaard\\Sebastian Paaske Tørholm}
 
@@ -59,15 +62,46 @@ form, we must have that $L \subseteq CH(E)$. By same argument as above, we get $
 This proves that $CH(L) = CH(E)$.
 
 \subsection{b}
-% TODO
+
+As seen in \autoref{counterexample}, we cannot simply use the method used by
+Graham's scan directly to solve the problem.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.5\textwidth]{counterexample.jpg}
+\caption{Counter example showing that Graham's scan directly does not solve the problem.}
+\label{counterexample}
+\end{figure}
+
+We observe that violating the constraint that the points need to be given in sorted order
+introduces problems, allowing it to degenerate a simple polygon to a non-simple one.
+
+Instead we base our approach on the algorithm ConvexHull from the book. 
+
+First we determine the leftmost and rightmost point. These two points partition the polygon into two parts, one of which we will convert to the bottom hull, and one of which we will convert to the top hull. Determining which is which\footnote{Equivalent to determining if polygon is clockwise or counter clockwise in relation to the two extreme points.} is simple. Simply take one extreme point and look one point in each direction. Since we know the polygon doesn't self-intersect, the topmost line segment will lie on the topmost part of our polygon.
+
+Let us look at how to find the bottom hull. The top hull is found similarly. Assume that the polygon is given in counter-clockwise order. If not, we can simply consider the edges in opposite order.
+
+We now perform the traversal similar to the one done in ConvexHull, in polygon order. If the last 3 points make a right turn, delete the middle point as in the algorithm provided. If the last 3 points make a left turn, and the last point has a lower x-coordinate than the second to last point, delete the last point added.
+
+This point will never be part of a convex hull, by the following argument: Since we've only performed left-turns to get to the current point, and the polygon doesn't self-intersect, the current point must be above a part of the current bottom hull. Therefore, it cannot be part of the bottom hull. Likewise, we know it cannot be part of the top hull, since the polygon doesn't self-intersect, and the top part of the polygon lies above the bottom part. We can therefore safely remove it.
+
+This should be enough to make the algorithm work, since we now handle both kinds of potential points with lower x-coordinate:
+
+\begin{itemize}
+    \item Those above the current hull introduce a left-turn with lower x coordinate on the last point, and are simply removed
+    \item Those below the current hull introduce a right-turn, which are handled fine by the original algorithm.
+\end{itemize}
+
+Analyzing the running time gives us $O(n)$ to find the extreme points, $O(1)$ to determine the order of the polygon, $O(n)$ to find the top and bottom hulls, and $O(1)$ to merge these into a final hull. This gives us the desired $O(n)$.
 
 \section{Chan's paper}
 
 Chan's paper describes an algorithm for finding the convex hull of of
-a set of objects in two and three dimensions using $O(n log h)$ time and
+a set of objects in two and three dimensions using $O(n \log h)$ time and
 linear space. Here, we will focus on the two-dimensional case.
 
-Several other algorithms for computing convex hulls in $O(n log h)$ time
+Several other algorithms for computing convex hulls in $O(n \log h)$ time
 have been presented, but they can be quite complicated to implement,
 and some of them hide big constants under the hood. Chan's proposed
 algorithm, on the other hand, uses simple techniques while achieving
@@ -77,7 +111,7 @@ The algorithm is simple in its description: split the set of points
 into groups of size $m$, where $0 < m \leq m$; compute the convex hull
 of each group using another simple CV algorithm, such as Graham's
 scan; and merge the groups using a gift-wrapping algorithm. Computing
-the convex hull for each group using Graham's scan takes $O(m log m)$, so
+the convex hull for each group using Graham's scan takes $O(m \log m)$, so
 the trick lies in picking an appropriate value for $m$ and performing
 the merge in an effective way.
 
@@ -95,8 +129,8 @@ for each $q_i$, we then have to find the $q$ out of all the $g_i$s,
 that maximizes the angle, which takes $O(n / m)$ time. Finally, we use
 this $q$ as our next initial point and $p_1$ as the previous point and
 continue the search. We perform this search a maximum of $H$ times,
-for a total of $O(H((n / m) log m))$ time. Thus, by choosing $H=m$,
-merging takes $O(m log m)$ time.
+for a total of $O(H((n / m) \log m))$ time. Thus, by choosing $H=m$,
+merging takes $O(m \log m)$ time.
 
 The binary search is not described in Chan's paper, only referencing
 another paper~\footnote{\emph{An algorithm for convex polytopes} by
@@ -111,10 +145,10 @@ matter~\footnote{\url{http://tomswitzer.net/2010/12/2d-convex-hulls-chans-algori
   accessed 2014-02-10}.
 
 Finally, we just have to chose an appropriate value for $H$. By simply
-trying successive values for $2^2^t$ until the above algorithm does
-not return \emph{incomplete}, we use at most $log log h$ tries to find
-the appropriate value for $H$, and with each iteration taking $O(n log
-h)$ time, the overall time complexity is $O(n log h)$.
+trying successive values for $2^{2^t}$ until the above algorithm does
+not return \emph{incomplete}, we use at most $\log \log h$ tries to find
+the appropriate value for $H$, and with each iteration taking $O(n \log
+h)$ time, the overall time complexity is $O(n \log h)$.
 
 \end{document}
 
