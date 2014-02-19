@@ -48,10 +48,10 @@ as such is an example of the worst case.
 
 We can easily modify the 1-dimensional range tree to accommodate range
 counting queries by letting each node store an integer that indicates
-how many leafs that nodes' tree contains. Then, querying becomes a
+how many leaves that nodes' tree contains. Then, querying becomes a
 simple matter of finding the nodes which we'd normally call
 \verb+ReportSubtree+ on (reporting all their children) and instead
-simply report how many leafs are in that sub-tree.
+simply report how many leaves are in that sub-tree.
 
 Proving that this modified 1-dimensional range tree lets us query for
 range counts in $O(\log n)$ time, is a simple matter of recalling that
@@ -73,5 +73,7 @@ reporting points, we are reporting the counts stored in the root of
 each sub tree, which takes constant time. Thus, the query time for
 d-dimensional range count queries using our modified d-dimensional is
 $O(\log^d n)$.
+
+\subsection{Exercise 5.10c}
 
 \end{document}
