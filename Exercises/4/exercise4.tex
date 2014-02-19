@@ -14,6 +14,20 @@
 
 \section{Exercise 6.5}
 
+Given an convex polygon $\mathcal{P}$ as an array of its $n$ vertices
+in sorted order around the boundary, we wish to decide in $O(\log n)$
+time whether a query point $q$ is inside the polygon.
+
+We do this by a recursive binary search. Find the point in the middle
+of the array, and determine whether or not the angle $\angle p_1
+p_{n/2} q$ is a left turn or a right turn. If it is a left turn,
+recursively go into the left half of the array (still using $p_1$ as
+the origin point) and similarly for right turns. If at some point we
+only have three points (and thus a triangle), checking whether $q$ is
+inside that triangle is a constant time operation. Since we always
+half the amount of vertices in our array, we are guaranteed to reach
+the base case at some point, and we only use $O(\log n)$ time.
+
 \section{Exercise 6.6}
 
 \section{Exercise 6.7}
