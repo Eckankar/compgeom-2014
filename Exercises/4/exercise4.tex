@@ -44,6 +44,18 @@ within this can be done in constant time.
 
 \section{Exercise 6.7}
 
+Here, we can use extend the algorithm from exercise 6.5. However, we
+need to start by simplifying the problem a bit, by finding a
+corresponding polygon $\mathcal{P}'$ where the point $p$ is one of the
+borders. We do this by picking a point $p'$ in $\mathcal{P}$. Then we
+draw and extend a line from $p$ to $p'$. Now, we can find two points
+$p_i$ and $p_{i+1}$ such that they are on each side of the line
+protruding from $pp'$. We now check
+
+bla bla, find two subpolygons including $p$ and use the algorithm from
+exercise 6.5 to see if $q$ is in either of them. Also check that $q$
+is not in the triangle $pp_ip_{i+1}$.
+
 \section{Exercise 6.16}
 
 \end{document}
