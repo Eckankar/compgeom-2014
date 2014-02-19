@@ -62,4 +62,16 @@ substituted the calls to \verb+ReportSubtree+ for a constant time
 operation (reporting the number stored in the node), and it thus
 follows that the query time must be $O(\log n + 1) = O(\log n)$.
 
+\subsection{Exercise 5.10b}
+
+By simply using the modified 1-dimensional range tree from exercise
+5.10a in the construction of a d-dimensional range tree, we can query
+for range counts analogously to how we did it in exercise 5.10a. From
+the proof for theorem 5.9, we get that the query time is $O(\log^d n +
+k)$, where $k$ is the time taken to report points. But instead of
+reporting points, we are reporting the counts stored in the root of
+each sub tree, which takes constant time. Thus, the query time for
+d-dimensional range count queries using our modified d-dimensional is
+$O(\log^d n)$.
+
 \end{document}
