@@ -44,5 +44,22 @@ as such is an example of the worst case.
 
 \section{Exercise 5.10}
 
-\end{document}
+\subsection{Exercise 5.10a}
 
+We can easily modify the 1-dimensional range tree to accommodate range
+counting queries by letting each node store an integer that indicates
+how many leafs that nodes' tree contains. Then, querying becomes a
+simple matter of finding the nodes which we'd normally call
+\verb+ReportSubtree+ on (reporting all their children) and instead
+simply report how many leafs are in that sub-tree.
+
+Proving that this modified 1-dimensional range tree lets us query for
+range counts in $O(\log n)$ time, is a simple matter of recalling that
+the query time for normal range queries in a 1-dimensional range tree
+is $O(\log n + k)$, where the $k$ is the time spent in calls to
+\verb+ReportSubtree+. In our range counting queries, we have
+substituted the calls to \verb+ReportSubtree+ for a constant time
+operation (reporting the number stored in the node), and it thus
+follows that the query time must be $O(\log n + 1) = O(\log n)$.
+
+\end{document}
