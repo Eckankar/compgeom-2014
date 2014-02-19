@@ -29,6 +29,18 @@ half the amount of vertices in our array, we are guaranteed to reach
 the base case at some point, and we only use $O(\log n)$ time.
 
 \section{Exercise 6.6}
+Given a y-monotone polygon $\mathcal{P}$ as an array of its $n$ vertices
+in sorted order around the boundary, we wish to decide in $O(\log n)$
+time whether a query point $q$ is inside the polygon.
+
+First we find the topmost and bottommost points $p_t$ and $p_b$ using binary
+search on the polygon. On both sides, we now use binary search to locate the
+points with y-coordinate immediately above ($p_{lu}$ and $p_{ru}$) and below
+($p_{lb}$ and $p_{rb}$) $q$.
+
+If $q$ is in $\mathcal{P}$, $q$ must be contained within the convex polygon
+$(p_{lu}, p_{ru}, p_{rb}, p_{lb})$. Checking if the point is contained
+within this can be done in constant time.
 
 \section{Exercise 6.7}
 
