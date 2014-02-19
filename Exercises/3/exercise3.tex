@@ -48,7 +48,7 @@ as such is an example of the worst case.
 
 We can easily modify the 1-dimensional range tree to accommodate range
 counting queries by letting each node store an integer that indicates
-how many leaves that nodes' tree contains. Then, querying becomes a
+how many leaves that node's subtree contains. Then, querying becomes a
 simple matter of finding the nodes which we'd normally call
 \verb+ReportSubtree+ on (reporting all their children) and instead
 simply report how many leaves are in that sub-tree.
@@ -75,5 +75,20 @@ d-dimensional range count queries using our modified d-dimensional is
 $O(\log^d n)$.
 
 \subsection{Exercise 5.10c}
+
+In the $d$-dimensional range tree, using fractional cascading on the last
+dimension, we recall that once we find the split node, we perform a binary
+search to find the smallest coordinate within our range.
+
+We choose to also, at this point, do a binary search to find the smallest
+coordinate above our range.
+
+We then follow the pointers stored in these spots into the subtrees we
+examine, as in the regular range query, but instead of iterating through the
+elements, we simply calculate the amount of nodes that would be reported as an
+offset of the positions in the array. Doing so gives $\log n$ $O(1)$ operations
+instead of the $O(k)$ reporting time. This gives a total query time of $O(\log n)$
+instead of $O(\log n + k)$ on the $2$-dimensional case, giving a total query time
+of $O(\log^{d-1}n)$ in the $d$-dimensional case.
 
 \end{document}
