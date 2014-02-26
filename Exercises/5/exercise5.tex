@@ -132,5 +132,20 @@ the 2 dimensional range trees) and query time is $O(\log n + k)$.
 
 \section{Exercise 10.10}
 
+We choose to use a priority search tree, in which we treat each
+interval as a two-dimensional point, $(start, end)$.
+
+Furthermore, we store the largest endpoint as $maxEnd$.
+
+If we can perform a single query against this tree and get the desired
+intervals, the storage and query constraints will be satisfied.
+
+The query we desire is then simply for the interval \[
+    (-\infty : x] \times [x' : maxEnd] 
+\]
+
+We simply desire any interval, where $start \leq x$ and
+$end \geq x'$, which is precisely captured by this region.
+
 \end{document}
 
