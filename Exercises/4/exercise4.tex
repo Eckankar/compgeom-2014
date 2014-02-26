@@ -99,5 +99,12 @@ The case for $R3$ is analogous.
 
 \section{Exercise 6.16}
 
+We can use the trapezoidal map from chapter 6 for this
+exercise. Corollary 6.4 gives us that we can construct a trapezoidal
+map that uses $O(n)$ expected storage in $O(n \log n)$ expected time,
+such that the expected point location query time is $O(\log n)$. Upon
+finding the face $\delta$ that the query point $q$ belongs to, we can
+simply find $top(\delta)$ which will give us the correct line segment.
+
 \end{document}
 
