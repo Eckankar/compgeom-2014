@@ -53,7 +53,19 @@
 \end{algorithm}
 
 \subsection{Correctness}
-% TODO
+By correctness of range tree querying, any line that isn't returned by the query
+to the range tree must have an y-coordinate outside of the interval $[y_1 : y_2]$.
+Since such a line cannot cross our query line, such a line shouldn't be reported.
+
+Furthermore, any line returned by the range query will have $y \in [y_1 : y_2]$,
+and that each such line will be contained in precisely one of the reported subtrees.
+
+By correctness of interval trees, we know that each interval belonging to the tree,
+containing the queried $x$ coordinate, is reported precisely once. Since furthermore
+each line corresponds to one interval, and is contained in precisely one interval tree
+\footnote{By virtue of belonging to precisely one subtree in the range tree.}, we know
+that each line segment with $y \in [y_1 : y_2]$, intersecting $x$, will be reported
+exactly once, which was what was desired.
 
 \subsection{Resource usage}
 Since interval trees take up $O(n)$ space, we can use the same argument as is used
