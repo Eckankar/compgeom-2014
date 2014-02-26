@@ -25,27 +25,28 @@
 	\SetArgSty{}
 
     $ys \leftarrow $ y-coordiates of $lines$\;
-    $T \leftarrow \BuildRangeTree(ys)$\;
-    \ForEach{$node \in T$}{
+    $\mathcal{T} \leftarrow \BuildRangeTree(ys)$\; 
+    \ForEach{$node \in \mathcal{T}$}{
         $ps \leftarrow $ points associated with $\CanonicalSubset(node)$\;
         $\Assoc(node) \leftarrow \ConstructIntervalTree(ps)$\;
     }
 
-    \Return{$T$}\;
+    \Return{$\mathcal{T}$}\;
 \end{algorithm}
 
 \begin{algorithm}[H]
     \SetKwData{lines}{lines}
 
-    \caption{\FuncSty{QueryExerciseTree(}$T,x,[y_1 : y_2]$\FuncSty{)}}
-
+    \caption{\FuncSty{QueryExerciseTree(}$\mathcal{T},x,[y_1 : y_2]$\FuncSty{)}}
+	
 	\SetKwFunction{RangeQuery}{1DRangeQuery}
 	\SetKwFunction{QueryIntervalTree}{QueryIntervalTree}
     \SetKwFunction{Assoc}{Assoc}
     \SetKwFunction{ReportAll}{ReportAll}
 	\SetArgSty{}
 
-    $nodes \leftarrow \RangeQuery(T, [y_1 : y_2])$\;
+    $nodes \leftarrow \RangeQuery(\mathcal{T}, [y_1 : y_2])$\; 
+
     \ForEach{$node \in nodes$}{
         $\ReportAll(\QueryIntervalTree(\Assoc(node), x))$\;
     }
