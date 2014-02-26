@@ -6,6 +6,9 @@
 
 \usepackage{amsmath,amssymb,amsfonts}
 
+\usepackage{hyperref}
+\usepackage{graphicx}
+
 \title{Computational Geometry - Point Location}
 \author{Philip Munksgaard \\ Sebastian Paaske Tørholm \\ Ejnar Håkonsen}
 
@@ -50,11 +53,49 @@ corresponding polygon $\mathcal{P}'$ where the point $p$ is one of the
 borders. We do this by picking a point $p'$ in $\mathcal{P}$. Then we
 draw and extend a line from $p$ to $p'$. Now, we can find two points
 $p_i$ and $p_{i+1}$ such that they are on each side of the line
-protruding from $pp'$. We now check
+protruding from $pp'$. These points are uniquely determined due to the
+star shape of $P$, and can be found in $O(\log n)$ using binary search.
+\footnote{Assuming that no three points are colinear. If there exists
+    a $p_i$ that is colinear with $p$ and $p'$, we can simply ignore
+    $R1$ as it degenerates, and use the same method as the one outlined
+    with $p_i$ in place of $p_{i+1}$.}
 
-bla bla, find two subpolygons including $p$ and use the algorithm from
-exercise 6.5 to see if $q$ is in either of them. Also check that $q$
-is not in the triangle $pp_ip_{i+1}$.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\textwidth]{regionsstar1.jpg}
+    \caption{Finding $p_i$ and $p_{i+1}$ in the star shaped polygon.}
+\end{figure}
+
+We now have that $q$ is contained within one of the three regions induced
+by the half-lines $p p_i$, $p p_{i+1}$ and $p p'$. We name these regions
+as shown in \autoref{regions-star}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\textwidth]{regionsstar2.jpg}
+    \caption{The 3 regions, $R1$, $R2$ and $R3$ induced by the half-lines
+    from $p$.}
+    \label{regions-star}
+\end{figure}
+
+In order to determine if $q$ is contained in $P$, we now do as follows:
+
+First, determine which region $q$ is located in; this can be done in constant
+time by checking left and right turns from the lines that delimit the
+regions.
+
+If $q$ is contained within $R1$, by seeing if the point is
+contained within the triangle $p p_i p_{i+1}$.
+
+If $q$ is contained within $R2$, $q$ being contained in $P$ is equivalent to
+$q$ being contained in the polygon $p_{i-1} p_i p p' \ldots$.
+
+Using $l = p'$ and $r = p_i$ as start points, we perform a binary search to
+narrow down the polygon $p l \ldots r$ around $q$. Once we've reduced the
+polygon to a triangle, we can then directly check if the point is contained
+within it.
+
+The case for $R3$ is analogous.
 
 \section{Exercise 6.16}
 
