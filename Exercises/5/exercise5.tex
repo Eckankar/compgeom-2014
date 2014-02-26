@@ -112,6 +112,20 @@ crossing edges.
 
 \section{Exercise 10.9}
 
+We use a range tree with fractional cascading like the one from
+exercise 5.10c. However, instead of $x$ and $y$ coordinates, we use
+the left and right endpoints of the intervals, such that the range
+tree indexes left endpoints, and the associated trees indexes the
+right endpoints. To query for a given interval $[x:x']$, we first
+search for nodes where the left endpoint is within the range and for
+each such node we search in the associated tree for right edges that
+are within the range. Then we simply check whether the interval
+associated with each right edge found is in the query interval and
+report the interval if that is the case.
+
+Construction time is $O(n \log n)$, space is $O(n \log n)$ (like in
+the 2 dimensional range trees) and query time is $O(\log n + k)$.
+
 \section{Exercise 10.10}
 
 \end{document}
