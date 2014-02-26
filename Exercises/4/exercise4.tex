@@ -108,5 +108,16 @@ such that the expected point location query time is $O(\log n)$. Upon
 finding the face $\delta$ that the query point $q$ belongs to, we can
 simply find $top(\delta)$ which will give us the correct line segment.
 
+If the line segments can intersect, we can still use the same
+algorithm, we just have to split of intersecting line segments
+first. We can use the algorithm \verb+FindIntersections+ from chapter
+2 to find all intersections in $O(n \log n + I \log n)$ time and
+$O(n)$ space where $I$ is the number of intersection points. Then we
+just have to split the line segments that intersect into new line
+segments that do not intersect, but meet at the former intersection
+point. Then, we simply use the same algorithm as above, for a query
+time of $O(\log n)$. The expected total construction time is $O(n \log
+n + I \log n)$ and the expected space requirement is $O(n)$.
+
 \end{document}
 
