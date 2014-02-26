@@ -56,7 +56,19 @@
 % TODO
 
 \subsection{Resource usage}
-% TODO
+Since interval trees take up $O(n)$ space, we can use the same argument as is used
+in lemma 5.6 to conclude that the range tree with associated interval trees takes up
+$O(n \log n)$ space.
+
+Constructing the outer range tree takes $O(n \log n)$. On each level, we construct a
+number of interval trees with cost $O(k_i \log k_i)$, with $\sum k_i = n$. The sum of
+the costs on each such level is bounded by $O(n \log n)$, and we have $\log n$ levels,
+giving us a total construction cost of $O(n \log^2 n)$.
+
+Querying the range tree costs $O(\log n)$, giving a list of length $O(\log n)$
+subtrees. For each of these returned elements, we do a $O(\log n + k_i)$ query
+against the associated interval tree, with $\sum k_i = k$ being the number of
+found line segments. This gives a total of $O(\log^2 n + k)$.
 
 \section{Exercise 10.6}
 
