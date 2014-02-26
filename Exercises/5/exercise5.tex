@@ -17,15 +17,15 @@
 \subsection{Pseudocode}
 \begin{algorithm}[H]
 	\caption{\FuncSty{BuildExerciseTree(}$lines$\FuncSty{)}}
-	
+
 	\SetKwFunction{BuildRangeTree}{Build1DRangeTree}
 	\SetKwFunction{ConstructIntervalTree}{ConstructIntervalTree}
     \SetKwFunction{CanonicalSubset}{CanonicalSubset}
     \SetKwFunction{Assoc}{Assoc}
 	\SetArgSty{}
-	
+
     $ys \leftarrow $ y-coordiates of $lines$\;
-    $T \leftarrow \BuildRangeTree(ys)$\; 
+    $T \leftarrow \BuildRangeTree(ys)$\;
     \ForEach{$node \in T$}{
         $ps \leftarrow $ points associated with $\CanonicalSubset(node)$\;
         $\Assoc(node) \leftarrow \ConstructIntervalTree(ps)$\;
@@ -38,14 +38,14 @@
     \SetKwData{lines}{lines}
 
     \caption{\FuncSty{QueryExerciseTree(}$T,x,[y_1 : y_2]$\FuncSty{)}}
-	
+
 	\SetKwFunction{RangeQuery}{1DRangeQuery}
 	\SetKwFunction{QueryIntervalTree}{QueryIntervalTree}
     \SetKwFunction{Assoc}{Assoc}
     \SetKwFunction{ReportAll}{ReportAll}
 	\SetArgSty{}
-	
-    $nodes \leftarrow \RangeQuery(T, [y_1 : y_2])$\; 
+
+    $nodes \leftarrow \RangeQuery(T, [y_1 : y_2])$\;
     \ForEach{$node \in nodes$}{
         $\ReportAll(\QueryIntervalTree(\Assoc(node), x))$\;
     }
