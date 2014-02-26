@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage[vlined, ruled, linesnumbered]{algorithm2e}
 
 \title{Computational Geometry - Geometric Data Structures}
 \author{Philip Munksgaard \\ Sebastian Paaske Tørholm \\ Ejnar Håkonsen}
@@ -13,6 +14,48 @@
 \maketitle
 
 \section{Exercise 10.1}
+\subsection{Pseudocode}
+\begin{algorithm}[H]
+	\caption{\FuncSty{BuildExerciseTree(}$lines$\FuncSty{)}}
+	
+	\SetKwFunction{BuildRangeTree}{Build1DRangeTree}
+	\SetKwFunction{ConstructIntervalTree}{ConstructIntervalTree}
+    \SetKwFunction{CanonicalSubset}{CanonicalSubset}
+    \SetKwFunction{Assoc}{Assoc}
+	\SetArgSty{}
+	
+    $ys \leftarrow $ y-coordiates of $lines$\;
+    $T \leftarrow \BuildRangeTree(ys)$\; 
+    \ForEach{$node \in T$}{
+        $ps \leftarrow $ points associated with $\CanonicalSubset(node)$\;
+        $\Assoc(node) \leftarrow \ConstructIntervalTree(ps)$\;
+    }
+
+    \Return{$T$}\;
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \SetKwData{lines}{lines}
+
+    \caption{\FuncSty{QueryExerciseTree(}$T,x,[y_1 : y_2]$\FuncSty{)}}
+	
+	\SetKwFunction{RangeQuery}{1DRangeQuery}
+	\SetKwFunction{QueryIntervalTree}{QueryIntervalTree}
+    \SetKwFunction{Assoc}{Assoc}
+    \SetKwFunction{ReportAll}{ReportAll}
+	\SetArgSty{}
+	
+    $nodes \leftarrow \RangeQuery(T, [y_1 : y_2])$\; 
+    \ForEach{$node \in nodes$}{
+        $\ReportAll(\QueryIntervalTree(\Assoc(node), x))$\;
+    }
+\end{algorithm}
+
+\subsection{Correctness}
+% TODO
+
+\subsection{Resource usage}
+% TODO
 
 \section{Exercise 10.6}
 
