@@ -81,6 +81,23 @@ query the tree in the same manner as in \verb+QuerySegmentTree+, only
 reporting the size of the canonical subsets instead of the canonical
 subset itself.
 
+\subsection{Using binary search trees}
+
+We use two binary search trees, one for the left edge of the
+intervals, and one for the right edge of the intervals. In addition to
+the coordinate, each node also stores the amount of left/right edges
+left of it, such that each node in the tree for left edges stores the
+amount of left edges to the left of that node, and each node in the
+tree for right edges stores the amount of right edges to the left of
+that it. Construction thus takes $O(n \log n)$ time, and uses $O(n)$
+space.
+
+To query, we first find the node corresponding to the highest valued
+left edge and the node corresponding to the lowest valued right
+edge. By simply subtracting the associated value for the right edge
+from the associated value for the left edge, we get the amount of
+crossing edges.
+
 \section{Exercise 10.9}
 
 \section{Exercise 10.10}
