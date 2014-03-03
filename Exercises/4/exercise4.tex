@@ -12,6 +12,8 @@
 \title{Computational Geometry - Point Location}
 \author{Philip Munksgaard \\ Sebastian Paaske Tørholm \\ Ejnar Håkonsen}
 
+\bibliographystyle{plain}
+
 \begin{document}
 \maketitle
 
@@ -97,7 +99,10 @@ within it.
 
 The case for $R3$ is analogous.
 
-% TODO: What if we don't have p?
+If $p$ is not given, we are not aware of a method of solving the problem in
+logarithmic time. Since finding $p$ takes $\Omega(n)$\cite{lee79}, we cannot
+use this algorithm in combination with finding such a $p$ within the given
+bounds.
 
 \section{Exercise 6.16}
 
@@ -119,5 +124,7 @@ point. Then, we simply use the same algorithm as above, for a query
 time of $O(\log n)$. The expected total construction time is $O(n \log
 n + I \log n)$ and the expected space requirement is $O(n)$.
 
+\section{References}
+\bibliography{references}
 \end{document}
 
