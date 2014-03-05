@@ -39,9 +39,14 @@ circle is in fact the circle on which $p$, $q$ and $r$ lie.
     &= - s_x a + s_y b - (s_x^2+s_y^2) c + d \\
     &= c (- s_x \frac{a}{c} + s_y \frac{b}{c} - (s_x^2+s_y^2) + \frac{d}{c})\\
     &= c (- (s_x + \frac{a}{2c})^2 - (s_y - \frac{b}{2c})^2 + \frac{4cd-a^2-b^2}{4c^2}) > 0 \\
-    &\Leftrightarrow - (s_x + \frac{a}{2c})^2 - (s_y - \frac{b}{2c})^2 + \frac{4cd-a^2-b^2}{4c^2} > 0 \tag{Since c > 0.\footnote{\url{https://people.richland.edu/james/lecture/m116/matrices/applications.html}}} \\ 
+    &\Leftrightarrow - (s_x + \frac{a}{2c})^2 - (s_y - \frac{b}{2c})^2 + \frac{4cd-a^2-b^2}{4c^2} > 0 \tag{Since c > 0, see note 1.} \\ 
     &\Leftrightarrow (s_x + \frac{a}{2c})^2 + (s_y - \frac{b}{2c})^2 < \frac{4cd-a^2-b^2}{4c^2}
 \end{align}
+
+Note 1: From
+\url{https://people.richland.edu/james/lecture/m116/matrices/applications.html
+} we know that $c$ represents the area of the triangle $pqr$. Since the points
+are given in clockwise order, we know $c$ to be positive.
 
 This is true precisely if $s$ in contained within the circle
 centred on $(-\frac{a}{2c}, \frac{b}{2c})$, with radius
