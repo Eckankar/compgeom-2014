@@ -23,6 +23,23 @@ they will all share an edge with the cell containing $p_0$ in the
 Voronoi diagram. As such, that cell will have exactly $n-1$ vertices.
 
 \section{Exercise 7.3}
+Assume we have $n$ numbers $x_1, \ldots, x_n$, and that we wish to sort these.
+
+In $O(n)$ we find the minimal and maximal numbers, $x_{min}$
+and $x_{max}$.
+
+If we now normalize these points from $[x_{min} : x_{max}]$ to $[0 : \Pi]$, calling
+$x_i$ normalized $x_i'$, we can now construct a 2-dimensional point-set.
+
+Let $p_0 = (0,0)$, and let $p_i = (\cos(x_i'), \sin(x_i'))$. Each $x_i$ will
+now correspond to a point on the unit circle. We now find a Voronoi diagram of
+this point set, and wish to use this to find a sorted order for $x_1, \ldots,
+x_n$.
+
+If we look at $p_0$, it is equidistant to every other point, and thus its cell
+will have an edge to each of them. Since the incident edges of a cell are
+stored in cyclic order, it takes at $O(n)$ to transform this edge list to the
+$x$'es in sorted order.
 
 \section{Exercise 7.10}
 
