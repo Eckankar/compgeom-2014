@@ -70,6 +70,21 @@ precision.
 \section{Exercise 9.11}
 \subsection{a}
 
+Suppose that there are two points, $p_1$ and $p_2$, that are not
+connected in the Delaunay triangulation. By theorem 9.6(ii) we know
+that two points form an edge in the Delaunay graph iff there is a
+closed disc $C$ that contains the two points on its boundary, and does
+not contain any other point of $P$. The minimal such circle must be
+the one with $\overline{p_1p_2}$ as the diameter. If
+$\overline{p_1p_2}$ is not connected in the Delaunay triangulation,
+there must exist another point $p_3$, which is connected to $p_1$ and
+$p_2$ inside $C$. That also means that $\overline{p_1p_3}$ and
+$\overline{p_2p_3}$ will be shorter than $\overline{p_1p_2}$. But,
+$p_1p_2p_3$ form a cycle in our graph, and from the cycle property of
+EMSTs we know that the longest edge in a cycle cannot be a part of the
+EMST. Thus, if $\overline{p_1p_2}$ are not in the Delaunay
+triangulation for a given graph $P$, they are not in the EMST for $P$
+either.
 
 \subsection{b}
 
