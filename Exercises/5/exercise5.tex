@@ -95,7 +95,22 @@ subset itself.
 
 \subsection{Using interval trees}
 
-%% TODO
+We use an unmodified interval tree to perform this query. To perform the
+query, we look at the median position and compare it to our query point.
+If the query point is on the left of the median, we use binary search on
+$\mathcal{L}_left$ to to determine the first interval to contain the query
+point. This gives us the number of intervals in $I_mid$ that cross the query
+line. We then recurse on the left subtree, repeating the same approach.
+If the point is on the right, the procedure is symmetrical.
+
+$I_mid$ can at most contain all $n$ lines, so the binary search on this is
+$O(\log n)$. Since our tree is divided on the median, $I_left$ and $I_right$
+can contain at most $n$ points, and thus at most $n/2$ lines. We can therefore
+express the running time for our query by the recurrence
+
+\[ T(n) = T(n/2) + O(\log n), \]
+
+which solves to $T(n) = O(\log n)$ by simple induction.
 
 \subsection{Using binary search trees}
 
