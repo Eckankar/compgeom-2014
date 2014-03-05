@@ -43,6 +43,17 @@ $x$'es in sorted order.
 
 \section{Exercise 7.10}
 
+We wish to find the two points of $P$ that are closest together.
+
+We can determine the Voronoi diagram in $O(n \log n)$ time. The
+Voronoi diagram contains at most $3n-6$ edges. Each edge connects two
+faces, each containing one point, and by simply checking all such
+edges to find the minimum distance between the two points they
+connect, we can find the two points that are closest together. We know
+that the faces containing the two points that are closest together
+must share an edge, because otherwise there would be another point
+somewhere in between, that is closer to the two points.
+
 \section{Exercise 7.12}
 
 \end{document}
