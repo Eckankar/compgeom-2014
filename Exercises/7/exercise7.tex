@@ -88,6 +88,15 @@ either.
 
 \subsection{b}
 
+First we obtain a Delaunay triangulation of $P$ in $O(n \lg n)$ time. 
+
+By lemma 9.11 we know such a triangulation to have $O(n)$ triangles.
+We can consider triangulation to make up a graph with $O(n)$ edges.
+Since we know an EMST of $P$ to be a spanning tree of the triangulation,
+we must have that it also is a minimum spanning tree. 
+Therefore, we can run Kruskal's algorithm in $O(n \lg n)$ on this graph,
+and obtain a minimum spanning tree on the triangulation, and thus get
+the desires EMST in $O(n \lg n)$.
 
 \end{document}
 
