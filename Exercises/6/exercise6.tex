@@ -56,5 +56,31 @@ somewhere in between, that is closer to the two points.
 
 \section{Exercise 7.12}
 
+%% Let the Voronoi diagram of a point set P be stored in a
+%% doubly-connected edge list inside a bounding box. Give an algorithm
+%% to compute all points of P that lie on the boundary of the convex
+%% hull of P in time linear in the output size. Assume that your
+%% algorithm receives as its input a pointer to the record of some
+%% half-edge whose origin lies on the bounding box.
+
+We start by adding the input point to the convex hull. We then want to
+find the next face containing a point on the convex hull. First, we'll
+use linear time to find an half-edge in the current face that's on the
+bounding box (the amount of edges in a Voronoi diagram is linear in
+the amount of nodes). When we've found an edge $e_b$ on the bounding
+box, we simply take the next edge $e_1$ and find it's twin half-edge
+$e_1'$ and corresponding face. The node contained in that face must be
+in the convex hull as well. Then, $e_1'.next$ must be the half-edge
+$e_b'$ that is on the bounding box of that face, and we can simply
+repeat the procedure from above until we're back to $e_b$.
+
+There is one special case that we have to take into consideration:
+When a face in the Voronoi diagram is in a corner. First, we note that
+there can be at most four of these cases. If, for some half-edge on
+the bounding box, $e$, $e.next$ is also on the bounding box (ie. it
+has no twin half-edge), we are in a corner and we simply use
+$e.next.next$ instead. If the edge between two faces in the Voronoi
+diagram fall exactly in a corner, we don't have to do anything.
+
 \end{document}
 
