@@ -7,6 +7,9 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{hyperref}
 
+\usepackage{graphicx}
+\usepackage{hyperref}
+
 \title{Computational Geometry - Fortune's Algorithm}
 \author{Philip Munksgaard \\ Sebastian Paaske Tørholm \\ Ejnar Håkonsen}
 
@@ -14,7 +17,28 @@
 \maketitle
 
 \section{Exercise 7.4}
+We wish to show that the break points of the beach line, $B$, trace out the Voronoi diagram, $Vor(P)$.
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\textwidth]{ex74-diagram.jpg}
+    \caption{Distances between points, their parabolas, their intersection and the sweep line.}
+    \label{ex74:dist}
+\end{figure}
+
+First we observe that each point in $B$ must be on the Voronoi diagram. We can
+argue this by letting $b$ be such a break point. If the distance from $b$ to
+the sweep line is $l$, then we must have that $p$ has distance $l$ to $b$, due
+to $b$ being on its parabola. Likewise, $p'$ must also have distance $l$ to
+$b$. As such, both points are equidistant to $b$. Since there are no
+points closer to $b$ than $p$ and $p'$, % TODO: Overbevis mig om hvorfor?
+we must have that $b$ is on the edge between $p$ and $p'$ in the Voronoi diagram.
+
+We now observe that each point in $Vor(P)$ must be in $B$ for some position
+of the sweep line. Let $v$ be a point from the Voronoi diagram, which has
+distance $l$ to $p$ and $p'$. If we place the sweep line $l$ below $v$, we
+will have that the parabola induced by $p$ will instersect the parabola
+induced by $p'$ in $v$.
 
 \section{Exercise 7.5}
 
